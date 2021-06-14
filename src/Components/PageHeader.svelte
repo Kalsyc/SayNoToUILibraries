@@ -4,10 +4,10 @@
 <div class="wrapper">
   <div class="title-text">Say NO to UI Libraries!</div>
   <div class="nav-wrapper">
+    <span><a href="/">Home</a></span>
     <span><a href="/components">Components</a></span>
     <span><a href="/articles">Articles</a></span>
     <span><a href="/blog">Blog</a></span>
-    <span><a href="/login">Login</a></span>
   </div>
   <div class="credits-div">
     <a href="https://github.com/Kalsyc/SayNoToUILibraries">
@@ -18,11 +18,11 @@
 </div>
 <!-- Mobile View -->
 <div class="m-nav-wrapper">
-  <span><a href="https://github.com/Kalsyc/SayNoToUILibraries">GitHub Repo</a></span>
+  <span><a href="/">Home</a></span>
   <span><a href="/components">Components</a></span>
   <span><a href="/articles">Articles</a></span>
   <span><a href="/blog">Blog</a></span>
-  <span><a href="/login">Login</a></span>
+  <span><a href="https://github.com/Kalsyc/SayNoToUILibraries">GitHub Repo</a></span>
 </div>
 
 <style>
