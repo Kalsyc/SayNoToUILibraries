@@ -7,7 +7,7 @@
     <span><a href="/">Home</a></span>
     <span><a href="/components">Components</a></span>
     <span><a href="/articles">Articles</a></span>
-    <span><a href="/blog">Blog</a></span>
+    <span><a href="/forum">Forum</a></span>
   </div>
   <div class="credits-div">
     <a href="https://github.com/Kalsyc/SayNoToUILibraries">
@@ -21,7 +21,7 @@
   <span><a href="/">Home</a></span>
   <span><a href="/components">Components</a></span>
   <span><a href="/articles">Articles</a></span>
-  <span><a href="/blog">Blog</a></span>
+  <span><a href="/forum">Forum</a></span>
   <span><a href="https://github.com/Kalsyc/SayNoToUILibraries">GitHub Repo</a></span>
 </div>
 
