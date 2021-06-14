@@ -1,11 +1,9 @@
 <script lang="ts">
-
 </script>
 
-<style>
-
-</style>
-
 <div>
-  
+  <div class="title-text">Say NO to UI Libraries!</div>
 </div>
+
+<style>
+</style>
