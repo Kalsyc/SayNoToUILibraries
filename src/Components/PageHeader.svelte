@@ -1,13 +1,15 @@
 <script lang="ts">
+  import { Link } from 'svelte-routing';
 </script>
 
 <div class="wrapper">
   <div class="title-text">Say NO to UI Libraries!</div>
   <div class="nav-wrapper">
-    <span><a href="/">Home</a></span>
-    <span><a href="/components">Components</a></span>
-    <span><a href="/articles">Articles</a></span>
-    <span><a href="/forum">Forum</a></span>
+    <span><Link class="" to="">Home</Link></span>
+    <span><Link to="playground">Playground</Link></span>
+    <span><Link to="components">Components</Link></span>
+    <span><Link to="articles">Articles</Link></span>
+    <span><Link to="forum">Forum</Link></span>
   </div>
   <div class="credits-div">
     <a href="https://github.com/Kalsyc/SayNoToUILibraries">
@@ -18,10 +20,11 @@
 </div>
 <!-- Mobile View -->
 <div class="m-nav-wrapper">
-  <span><a href="/">Home</a></span>
-  <span><a href="/components">Components</a></span>
-  <span><a href="/articles">Articles</a></span>
-  <span><a href="/forum">Forum</a></span>
+  <span><Link to="">Home</Link></span>
+  <span><Link to="playground">Playground</Link></span>
+  <span><Link to="components">Components</Link></span>
+  <span><Link to="articles">Articles</Link></span>
+  <span><Link to="forum">Forum</Link></span>
   <span><a href="https://github.com/Kalsyc/SayNoToUILibraries">GitHub Repo</a></span>
 </div>
 
@@ -54,12 +57,16 @@
     display: none;
   }
 
-  .m-nav-wrapper span a,
-  .m-nav-wrapper span a:visited {
+  .m-nav-wrapper :global(a),
+  .m-nav-wrapper :global(a:visited) {
     text-decoration: underline;
     color: black;
     margin: 0 5px;
     white-space: nowrap;
+  }
+
+  .m-nav-wrapper :global(a:hover) {
+    opacity: 50%;
   }
 
   .wrapper {
@@ -96,12 +103,16 @@
       align-items: center;
     }
 
-    .nav-wrapper span a,
-    .nav-wrapper span a:visited {
+    .nav-wrapper :global(a),
+    .nav-wrapper :global(a:visited) {
       text-decoration: underline;
       color: black;
       margin: 0 5px;
       white-space: nowrap;
+    }
+
+    .nav-wrapper :global(a:hover) {
+      opacity: 50%;
     }
 
     .credits-div {

@@ -4,7 +4,6 @@
 </script>
 
 <main>
-  <PageHeader />
   <div class="home-div">
     <div class="welcome-text">Why bother with CSS Frameworks when you can copy paste the best practices from here!</div>
     <ComponentEditor />

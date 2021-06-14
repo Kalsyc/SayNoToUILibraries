@@ -1,6 +1,6 @@
 <script lang="ts">
-  import PageHeader from './Components/PageHeader.svelte';
   import Router from './routes.svelte';
+  export let name = '';
 </script>
 
 <main>
