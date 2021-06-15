@@ -65,22 +65,45 @@
       <Editor lang="CSS" mode="css" onChange={debounceCSS} value={css} />
       <Editor lang="JS" mode="javascript" onChange={debounceJS} value={js} />
     </div>
-    <div>
+    <div class="divider"></div>
+    <div class="frame-panel">
       <iframe contenteditable title="output" sandbox="allow-scripts" frameBorder="0" srcdoc={srcDoc} />
     </div>
   </div>
 </main>
 
 <style>
+
   .playground-wrapper {
     display: flex;
-    flex-direction: column;
+    flex-direction: column; 
   }
+
+  .divider {
+    border: black 2px solid;
+    height: 0px;
+    margin: 5px 0;
+  }
+
   .editor-wrapper {
-    height: 40vh;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
     background-color: aliceblue;
+  }
+
+  .frame-panel {
+    height: 40vh;
+    width: 100vw;
+  }
+
+  @media screen and (min-width: 768px) {
+    .editor-wrapper {
+      height: 45vh;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      background-color: aliceblue;
+    }
   }
 </style>

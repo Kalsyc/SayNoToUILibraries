@@ -24,11 +24,12 @@
       theme: 'material',
       indentUnit: 2,
       value: value,
-      lineWrapping: true
+      lineWrapping: true,
     })
     editor.on('changes', (instance, changeObj) => {
       onChange(instance.doc.getValue());
     });
+    editor.setSize('auto', '40vh')
   });
 </script>
 
@@ -43,7 +44,12 @@
   .wrapper {
     display: flex;
     flex-direction: column;
-    width: 30vw;
     margin: 0 5px;
+
+  }
+  @media screen and (min-width: 768px) {
+    .wrapper {
+    width: 30vw;
+    }
   }
 </style>
