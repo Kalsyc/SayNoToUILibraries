@@ -1,8 +1,8 @@
 <script>
   import { Router, Route } from 'svelte-routing';
-  import PageHeader from './Components/PageHeader.svelte';
-  import Home from './Pages/Home.svelte';
-  import Playground from './Pages/Playground.svelte';
+  import PageHeader from './components/PageHeader.svelte';
+  import Home from './pages/Home.svelte';
+  import Playground from './pages/Playground.svelte';
   export let url = '';
 </script>
 

@@ -16,20 +16,23 @@
   onMount(() => {
     const childArea: HTMLTextAreaElement = document.createElement('textarea');
     editorContainer.appendChild(childArea);
-    const editor = CodeMirror(function(elt) {
-      editorContainer.replaceChild(elt, childArea);
-    }, {
-      mode: mode,
-      lineNumbers: true,
-      theme: 'material',
-      indentUnit: 2,
-      value: value,
-      lineWrapping: true,
-    })
+    const editor = CodeMirror(
+      function (elt) {
+        editorContainer.replaceChild(elt, childArea);
+      },
+      {
+        mode: mode,
+        lineNumbers: true,
+        theme: 'material',
+        indentUnit: 2,
+        value: value,
+        lineWrapping: true,
+      },
+    );
     editor.on('changes', (instance, changeObj) => {
       onChange(instance.doc.getValue());
     });
-    editor.setSize('auto', '40vh')
+    editor.setSize('auto', '40vh');
   });
 </script>
 
@@ -45,11 +48,10 @@
     display: flex;
     flex-direction: column;
     margin: 0 5px;
-
   }
   @media screen and (min-width: 768px) {
     .wrapper {
-    width: 30vw;
+      width: 30vw;
     }
   }
 </style>
