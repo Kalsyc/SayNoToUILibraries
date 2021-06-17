@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+
   import Editor from '../components/Editor.svelte';
   import {
     defaultLoggerPrepend,
@@ -8,10 +10,19 @@
   } from '../constants/playground';
   import { pushToLocalStorage, retrieveFromLocalStorage } from '../services/storage.service';
 
+  console.log(retrieveFromLocalStorage('html'));
+
   let html: string = retrieveFromLocalStorage('html') ? retrieveFromLocalStorage('html') : defaultPlaygroundHTML;
   let css: string = retrieveFromLocalStorage('css') ? retrieveFromLocalStorage('css') : defaultPlaygroundCSS;
   let js: string = retrieveFromLocalStorage('js') ? retrieveFromLocalStorage('js') : defaultPlaygroundJS;
   let _js: string = defaultLoggerPrepend + js;
+
+  onMount(() => {
+    html = retrieveFromLocalStorage('js') ? retrieveFromLocalStorage('js') : defaultPlaygroundJS;
+    css = retrieveFromLocalStorage('css') ? retrieveFromLocalStorage('css') : defaultPlaygroundCSS;
+    js = retrieveFromLocalStorage('js') ? retrieveFromLocalStorage('js') : defaultPlaygroundJS;
+    _js = defaultLoggerPrepend + js;
+  });
 
   let logArray: string[] = [];
 
