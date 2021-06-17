@@ -17,7 +17,7 @@
 
   $: srcDoc = `<html><body>${html}</body><sty` + `le>${css}</style><scr` + `ipt>${_js}</scr` + `ipt></html>`;
 
-  const debounceHTML = (value: string) => {
+  const debounceHTML = (value: string): (() => void) => {
     const timer: NodeJS.Timeout = setTimeout(() => {
       html = value;
       pushToLocalStorage('html', value);
@@ -25,7 +25,7 @@
     return () => clearTimeout(timer);
   };
 
-  const debounceCSS = (value: string) => {
+  const debounceCSS = (value: string): (() => void) => {
     const timer: NodeJS.Timeout = setTimeout(() => {
       css = value;
       pushToLocalStorage('css', value);
@@ -33,7 +33,7 @@
     return () => clearTimeout(timer);
   };
 
-  const debounceJS = (value: string) => {
+  const debounceJS = (value: string): (() => void) => {
     const timer: NodeJS.Timeout = setTimeout(() => {
       js = value;
       _js = defaultLoggerPrepend + value;

@@ -10,7 +10,7 @@
   let editorContainer: HTMLDivElement;
   export let lang: string;
   export let mode: string;
-  export let onChange;
+  export let onChange: (string) => void;
   export let value: string;
 
   onMount(() => {
