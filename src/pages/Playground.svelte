@@ -1,53 +1,17 @@
 <script lang="ts">
   import Editor from '../components/Editor.svelte';
+  import {
+    defaultLoggerPrepend,
+    defaultPlaygroundHTML,
+    defaultPlaygroundCSS,
+    defaultPlaygroundJS,
+  } from '../constants/playground';
+  import { pushToLocalStorage, retrieveFromLocalStorage } from '../services/storage.service';
 
-  const iframeLogger: string = `const _log = console.log;
-  console.log = function(...rest) {
-    window.parent.postMessage(
-      {
-        source: 'iframe',
-        message: rest,
-      },
-      '*'
-    );
-    _log.apply(console, arguments);
-  };
-`;
-
-  let html: string = `<button class="general-btn fill-btn" onclick="onChange()">
-  Press me!
-</button>
-`;
-
-  let css: string = `.general-btn {
-  width: 120px;
-  height: 50px;
-  margin: 10px;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 14px;
-  line-height: 14px;
-  font-family: Roboto;
-  font-weight: 500;
-  border: none;
-}
-
-.fill-btn {
-  color: #ffffff;
-  background: linear-gradient(263.58deg, #ff8787 -19.46%, #ffb21c 84.09%, #ffde33 131.25%);
-}
-
-.general-btn:hover {
-  opacity: 50%;
-}
-`;
-
-  let js: string = `const onChange = () => console.log("Pressed!")
-`;
-  let _js: string =
-    iframeLogger +
-    `const onChange = () => console.log("Pressed!")
-`;
+  let html: string = retrieveFromLocalStorage('html') ? retrieveFromLocalStorage('html') : defaultPlaygroundHTML;
+  let css: string = retrieveFromLocalStorage('css') ? retrieveFromLocalStorage('css') : defaultPlaygroundCSS;
+  let js: string = retrieveFromLocalStorage('js') ? retrieveFromLocalStorage('js') : defaultPlaygroundJS;
+  let _js: string = defaultLoggerPrepend + js;
 
   let logArray: string[] = [];
 
@@ -56,6 +20,7 @@
   const debounceHTML = (value: string) => {
     const timer: NodeJS.Timeout = setTimeout(() => {
       html = value;
+      pushToLocalStorage('html', value);
     }, 300);
     return () => clearTimeout(timer);
   };
@@ -63,6 +28,7 @@
   const debounceCSS = (value: string) => {
     const timer: NodeJS.Timeout = setTimeout(() => {
       css = value;
+      pushToLocalStorage('css', value);
     }, 300);
     return () => clearTimeout(timer);
   };
@@ -70,7 +36,8 @@
   const debounceJS = (value: string) => {
     const timer: NodeJS.Timeout = setTimeout(() => {
       js = value;
-      _js = iframeLogger + value;
+      _js = defaultLoggerPrepend + value;
+      pushToLocalStorage('js', value);
     }, 300);
     return () => clearTimeout(timer);
   };
