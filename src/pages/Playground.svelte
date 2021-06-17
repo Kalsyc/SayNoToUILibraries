@@ -10,7 +10,7 @@
   } from '../constants/playground';
   import { pushToLocalStorage, retrieveFromLocalStorage } from '../services/storage.service';
 
-  console.log(retrieveFromLocalStorage('html'));
+  //console.log(retrieveFromLocalStorage('html'));
 
   let html: string = retrieveFromLocalStorage('html') ? retrieveFromLocalStorage('html') : defaultPlaygroundHTML;
   let css: string = retrieveFromLocalStorage('css') ? retrieveFromLocalStorage('css') : defaultPlaygroundCSS;
@@ -18,7 +18,7 @@
   let _js: string = defaultLoggerPrepend + js;
 
   onMount(() => {
-    html = retrieveFromLocalStorage('js') ? retrieveFromLocalStorage('js') : defaultPlaygroundJS;
+    html = retrieveFromLocalStorage('html') ? retrieveFromLocalStorage('html') : defaultPlaygroundHTML;
     css = retrieveFromLocalStorage('css') ? retrieveFromLocalStorage('css') : defaultPlaygroundCSS;
     js = retrieveFromLocalStorage('js') ? retrieveFromLocalStorage('js') : defaultPlaygroundJS;
     _js = defaultLoggerPrepend + js;
