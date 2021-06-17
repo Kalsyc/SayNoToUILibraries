@@ -4,6 +4,5 @@
   "semi": true,
   "tabWidth": 2,
   "trailingComma": "all",
-  "bracketSpacing": true,
-  "embeddedLanguageFormatting": "off"
+  "bracketSpacing": true
 }
