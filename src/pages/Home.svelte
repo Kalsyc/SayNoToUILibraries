@@ -1,6 +1,5 @@
 <script lang="ts">
-  import ComponentEditor from '../Components/ComponentEditor.svelte';
-  import PageHeader from '../Components/PageHeader.svelte';
+  import ComponentEditor from '../components/ComponentEditor.svelte';
 </script>
 
 <main>

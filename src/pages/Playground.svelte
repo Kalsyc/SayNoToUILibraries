@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Editor from '../Components/Editor.svelte';
+  import Editor from '../components/Editor.svelte';
 
   const iframeLogger: string = `const _log = console.log;
   console.log = function(...rest) {
