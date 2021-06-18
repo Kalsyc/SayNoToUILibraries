@@ -33,6 +33,10 @@
       onChange(instance.doc.getValue());
     });
     editor.setSize('auto', '40vh');
+
+    setTimeout(() => {
+      editor.refresh();
+    }, 100);
   });
 </script>
 
