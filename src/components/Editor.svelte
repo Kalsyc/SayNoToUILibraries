@@ -8,24 +8,26 @@
   import { onMount } from 'svelte';
 
   let editorContainer: HTMLDivElement;
+  let editorTextArea: HTMLTextAreaElement;
   export let lang: string;
   export let mode: string;
   export let onChange: (string) => void;
   export let value: string;
 
   onMount(() => {
-    const childArea: HTMLTextAreaElement = document.createElement('textarea');
-    editorContainer.appendChild(childArea);
-    const editor = CodeMirror(
-      function (elt) {
-        editorContainer.replaceChild(elt, childArea);
-      },
+    //const childArea: HTMLTextAreaElement = document.createElement('textarea');
+    //editorContainer.appendChild(childArea);
+    editorTextArea.textContent = value;
+    const editor = CodeMirror.fromTextArea(
+      editorTextArea,
+      //function (elt) {
+      //editorContainer.replaceChild(elt, childArea);
+      //},
       {
         mode: mode,
         lineNumbers: true,
         theme: 'material',
         indentUnit: 2,
-        value: value,
         lineWrapping: true,
       },
     );
@@ -43,7 +45,9 @@
 <main>
   <div class="wrapper">
     <span>{lang}</span>
-    <div bind:this={editorContainer} />
+    <div bind:this={editorContainer}>
+      <textarea bind:this={editorTextArea} />
+    </div>
   </div>
 </main>
 

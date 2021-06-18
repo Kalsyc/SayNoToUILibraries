@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
+  import { beforeUpdate, onMount } from 'svelte';
 
   import Editor from '../components/Editor.svelte';
   import {
@@ -18,6 +18,11 @@
   let _js: string = defaultLoggerPrepend + js;
 
   /*
+  beforeUpdate(() => {
+    refreshMount();
+  });
+
+  
   onMount(() => {
     html = retrieveFromLocalStorage('html') ? retrieveFromLocalStorage('html') : defaultPlaygroundHTML;
     css = retrieveFromLocalStorage('css') ? retrieveFromLocalStorage('css') : defaultPlaygroundCSS;
@@ -29,6 +34,13 @@
   let logArray: string[] = [];
 
   $: srcDoc = `<html><body>${html}</body><sty` + `le>${css}</style><scr` + `ipt>${_js}</scr` + `ipt></html>`;
+
+  const refreshMount = (): void => {
+    html = retrieveFromLocalStorage('html') ? retrieveFromLocalStorage('html') : defaultPlaygroundHTML;
+    css = retrieveFromLocalStorage('css') ? retrieveFromLocalStorage('css') : defaultPlaygroundCSS;
+    js = retrieveFromLocalStorage('js') ? retrieveFromLocalStorage('js') : defaultPlaygroundJS;
+    _js = defaultLoggerPrepend + js;
+  };
 
   const debounceHTML = (value: string): (() => void) => {
     const timer: NodeJS.Timeout = setTimeout(() => {
