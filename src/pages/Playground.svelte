@@ -17,12 +17,14 @@
   let js: string = retrieveFromLocalStorage('js') ? retrieveFromLocalStorage('js') : defaultPlaygroundJS;
   let _js: string = defaultLoggerPrepend + js;
 
+  /*
   onMount(() => {
     html = retrieveFromLocalStorage('html') ? retrieveFromLocalStorage('html') : defaultPlaygroundHTML;
     css = retrieveFromLocalStorage('css') ? retrieveFromLocalStorage('css') : defaultPlaygroundCSS;
     js = retrieveFromLocalStorage('js') ? retrieveFromLocalStorage('js') : defaultPlaygroundJS;
     _js = defaultLoggerPrepend + js;
   });
+  */
 
   let logArray: string[] = [];
 
