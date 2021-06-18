@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { beforeUpdate, onMount } from 'svelte';
+  import { afterUpdate } from 'svelte';
 
   import Editor from '../components/Editor.svelte';
   import {
@@ -10,65 +10,40 @@
   } from '../constants/playground';
   import { pushToLocalStorage, retrieveFromLocalStorage } from '../services/storage.service';
 
-  //console.log(retrieveFromLocalStorage('html'));
-
   let html: string = retrieveFromLocalStorage('html') ? retrieveFromLocalStorage('html') : defaultPlaygroundHTML;
   let css: string = retrieveFromLocalStorage('css') ? retrieveFromLocalStorage('css') : defaultPlaygroundCSS;
   let js: string = retrieveFromLocalStorage('js') ? retrieveFromLocalStorage('js') : defaultPlaygroundJS;
   let _js: string = defaultLoggerPrepend + js;
 
-  /*
-  beforeUpdate(() => {
-    refreshMount();
-  });
-
-  
-  onMount(() => {
-    html = retrieveFromLocalStorage('html') ? retrieveFromLocalStorage('html') : defaultPlaygroundHTML;
-    css = retrieveFromLocalStorage('css') ? retrieveFromLocalStorage('css') : defaultPlaygroundCSS;
-    js = retrieveFromLocalStorage('js') ? retrieveFromLocalStorage('js') : defaultPlaygroundJS;
-    _js = defaultLoggerPrepend + js;
-  });
-  */
-
   let logArray: string[] = [];
+  let iframeElement: HTMLIFrameElement;
+  let srcDoc: string = '';
 
-  $: srcDoc = `<html><body>${html}</body><sty` + `le>${css}</style><scr` + `ipt>${_js}</scr` + `ipt></html>`;
+  afterUpdate(() => {
+    const timer: NodeJS.Timeout = setTimeout(() => {
+      srcDoc = `<html><body>${html}</body><sty` + `le>${css}</style><scr` + `ipt>${_js}</scr` + `ipt></html>`;
+    }, 500);
+    return () => clearTimeout(timer);
+  });
 
-  const refreshMount = (): void => {
-    html = retrieveFromLocalStorage('html') ? retrieveFromLocalStorage('html') : defaultPlaygroundHTML;
-    css = retrieveFromLocalStorage('css') ? retrieveFromLocalStorage('css') : defaultPlaygroundCSS;
-    js = retrieveFromLocalStorage('js') ? retrieveFromLocalStorage('js') : defaultPlaygroundJS;
-    _js = defaultLoggerPrepend + js;
+  const setHTML = (value: string): void => {
+    html = value;
+    pushToLocalStorage('html', value);
   };
 
-  const debounceHTML = (value: string): (() => void) => {
-    const timer: NodeJS.Timeout = setTimeout(() => {
-      html = value;
-      pushToLocalStorage('html', value);
-    }, 300);
-    return () => clearTimeout(timer);
+  const setCSS = (value: string): void => {
+    html = value;
+    pushToLocalStorage('css', value);
   };
 
-  const debounceCSS = (value: string): (() => void) => {
-    const timer: NodeJS.Timeout = setTimeout(() => {
-      css = value;
-      pushToLocalStorage('css', value);
-    }, 300);
-    return () => clearTimeout(timer);
-  };
-
-  const debounceJS = (value: string): (() => void) => {
-    const timer: NodeJS.Timeout = setTimeout(() => {
-      js = value;
-      _js = defaultLoggerPrepend + value;
-      pushToLocalStorage('js', value);
-    }, 300);
-    return () => clearTimeout(timer);
+  const setJS = (value: string): void => {
+    js = value;
+    _js = defaultLoggerPrepend + value;
+    pushToLocalStorage('js', value);
   };
 
   window.addEventListener('message', (res: MessageEvent<any>) => {
-    if (res.data && res.data.source === 'iframe') {
+    if (res.data?.source === 'iframe') {
       logArray = [...logArray, res.data.message[0]];
     }
   });
@@ -77,18 +52,19 @@
 <main>
   <div class="playground-wrapper">
     <div class="editor-wrapper">
-      <Editor lang="HTML" mode="xml" onChange={debounceHTML} value={html} />
-      <Editor lang="CSS" mode="css" onChange={debounceCSS} value={css} />
-      <Editor lang="JS" mode="javascript" onChange={debounceJS} value={js} />
+      <Editor lang="HTML" mode="xml" onChange={setHTML} value={html} />
+      <Editor lang="CSS" mode="css" onChange={setCSS} value={css} />
+      <Editor lang="JS" mode="javascript" onChange={setJS} value={js} />
     </div>
     <div class="divider" />
     <div class="frame-div">
       <iframe
+        bind:this={iframeElement}
         class="iframe-panel"
         id="playground-frame"
         contenteditable
         title="output"
-        sandbox="allow-scripts"
+        sandbox="allow-scripts allow-same-origin"
         frameBorder="0"
         srcdoc={srcDoc}
       />
